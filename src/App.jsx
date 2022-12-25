@@ -19,6 +19,8 @@ import UserList from "./admin/adminPages/userList/UserList";
 
 
 
+
+
 function App() {
   const user = useSelector(state => state.user.currentUser)
   return (
@@ -41,7 +43,7 @@ function App() {
           <Route path="/admin" element={<LayoutAdmin />}>
             {/* outlet */}
             <Route path="/admin" element={<HomeAdmin />} />
-            <Route  path="/admin/users" element={<UserList />} />
+            <Route path="/admin/users" element={<UserList />} />
             <Route path="/admin/user/:userId" element={<User />} />
             <Route path="/admin/products" element={<ProductListAdmin />} />
             <Route path="/admin/product/:productId" element={<ProductAdmin />} />

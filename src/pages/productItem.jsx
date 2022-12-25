@@ -7,6 +7,9 @@ import { useEffect, useState } from 'react';
 import { doApiGet, server_url } from '../services/apiServices';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../features/cartSlice';
+import CircularIndeterminate from '../components/loading';
+import { toast } from 'react-toastify';
+
 
 const Container = styled.div`
 max-width:100% ;
@@ -148,7 +151,7 @@ const ProductItem = () => {
         }
         catch (err) {
             console.log(err.response);
-            alert("There problem try come back later")
+            toast.error("There problem try come back later")
         }
     }
 
@@ -207,7 +210,16 @@ const ProductItem = () => {
                         </AddContainer>
                     </InfoContainer>
                 </Wrapper>
-                : <h2 style={{textAlign:"center"}}>Loading...</h2>}
+                : 
+                <div  style={{
+                    height: "100vh",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}>
+                    <CircularIndeterminate/>
+                </div>}
         </Container>
     )
 }

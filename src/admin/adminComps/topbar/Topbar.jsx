@@ -4,6 +4,8 @@ import LanguageIcon from '@mui/icons-material/Language';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+
 import "./topbar.css";
 
 export default function Topbar() {
@@ -17,7 +19,7 @@ export default function Topbar() {
   const onCheck = () => {
     if (user.role != "admin") {
       nav("/")
-      alert(`hello ${user.username} You are not allowed to be in this area`)
+      toast.error(`hello ${user.username} You are not allowed to be in this area`)
     }
   }
 

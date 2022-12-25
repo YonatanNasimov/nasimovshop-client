@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout';
 import { doApiMethod, server_url, userRequest } from '../services/apiServices';
 import { Link, useNavigate } from 'react-router-dom';
-import { resetAllItems, setOrders } from '../features/cartSlice';
+import { deleteSingleItem, resetAllItems, setOrders } from '../features/cartSlice';
 
 const STRIPE_PUBLIC_KEY = "pk_test_51M6IivLjTCi7TO8ZcK9apuTBKJEMW10xwW8HbaEhyFlhXmP4X0Yw5SCpwSPhDDCUUQKDM9no0jcPvxSmRT8yMGDP00b7S5rno6";
 
@@ -78,10 +78,12 @@ ${mobile({
 const Details = styled.div`
 padding: 20px;
 display: flex;
+word-break: break-all; 
 flex-direction:column ;
 ${mobile({
     marginLeft: "8px",
     padding: "8px 0px",
+    wordWrap: "break-word",
     maxWidth: "100%",
     justifyContent: "space-around"
 })}
@@ -206,16 +208,16 @@ const Cart = () => {
 
     return (
 
-        <Container>
+        <Container style={{ wordWrap: "break-word" }}>
             <Wrapper>
                 <Title>YOUR BAG.</Title>
                 <Top>
                     <TopButton type='filled' onClick={() => {
-                        if(cart.products.length > 0){
-                            window.confirm("are you sure you want to delete all?") && dispatch(resetAllItems());
+                        if (cart.products.length > 0) {
+                            dispatch(resetAllItems());
                         }
                     }} className='btn btn-danger mt-3'>Reset all</TopButton>
-                        <TopButton onClick={() => nav(-1)}>CONTINUE SHOPING</TopButton>
+                    <TopButton onClick={() => nav(-1)}>CONTINUE SHOPING</TopButton>
                 </Top>
                 <Bottom>
                     <Info>
@@ -228,15 +230,17 @@ const Cart = () => {
                                             <Details>
                                                 <ProductName><b>Product:</b>{product.title}</ProductName>
                                                 <ProductId><b>ID:</b>{product._id}</ProductId>
-                                                <ProductColor color={product.color} />
-                                                <ProductSize><b>Size:</b>{product.size}</ProductSize>
+                                                <ProductColor color={product.color || "black"} />
+                                                <ProductSize><b>Size:</b>{product.size || "S"}</ProductSize>
+                                                <button onClick={() => {
+                                                    dispatch(deleteSingleItem({ delId: product._id, price: product.price * product.quantity }))
+                                                    nav("/Product/" + product._id)
+                                                }} style={{ marginTop: "8px" }}><b>Delete/Edit</b></button>
                                             </Details>
                                         </ProductDetails>
                                         <PriceDetails>
                                             <ProductAmountContainer>
-                                                <AddIcon />
                                                 <ProductAmount>{product.quantity}</ProductAmount>
-                                                <RemoveIcon />
                                             </ProductAmountContainer>
                                             <ProductPrice>{product.price * product.quantity}</ProductPrice>
                                         </PriceDetails>

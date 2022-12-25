@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { format } from "timeago.js";
 import { doApiGet, server_url } from "../../../services/apiServices";
+import { toast } from 'react-toastify';
 import "./widgetLg.css";
 
 export default function WidgetLg() {
@@ -17,7 +18,7 @@ export default function WidgetLg() {
     }
     catch (err) {
       console.log(err.response);
-      alert("There problem try come back later")
+      toast.error("There problem try come back later")
     }
   }
 

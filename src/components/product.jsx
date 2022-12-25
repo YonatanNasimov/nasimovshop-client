@@ -4,6 +4,7 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import CircularIndeterminate from './loading';
 
 const Info = styled.div`
     opacity:0 ;
@@ -88,7 +89,15 @@ const Product = (props) => {
                     </Info>
 
                 </Container>
-                : <h3 style={{ textAlign: "center", margin: "20px 0px" }}>Loading...</h3>}
+                : <div  style={{
+                    height: "100vh",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}>
+                    <CircularIndeterminate/>
+                </div>}
         </React.Fragment>
     )
 }

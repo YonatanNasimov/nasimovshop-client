@@ -7,6 +7,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { format } from "timeago.js";
 import { doApiMethod, server_url } from "../../../services/apiServices";
 import UpdateUser from '../../adminComps/updateUser';
+import { toast } from 'react-toastify';
 import "./user.css";
 
 export default function User() {
@@ -37,7 +38,7 @@ export default function User() {
     }
     catch (err) {
       console.log(err.response);
-      alert("There problem, or you try to change superAdmin to user");
+      toast.error("There problem, or you try to change superAdmin to user");
     }
   }
   const onActiveClick = async () => {
@@ -60,7 +61,7 @@ export default function User() {
     }
     catch (err) {
       console.log(err.response);
-      alert("There problem, or you try to change superAdmin to user");
+      toast.error("There problem, or you try to change superAdmin to user");
     }
   }
 

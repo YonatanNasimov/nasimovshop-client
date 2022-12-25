@@ -38,7 +38,6 @@ export default function ProductAdmin() {
         }
         catch (err) {
             console.log(err);
-            alert(err)
         }
     }
     

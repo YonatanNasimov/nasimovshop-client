@@ -6,6 +6,7 @@ import WidgetLg from "../../adminComps/widgetLg/WidgetLg";
 import { useEffect, useMemo } from "react";
 import { doApiGet, server_url } from "../../../services/apiServices";
 import { useState } from "react";
+import { toast } from 'react-toastify';
 import "./home.css";
 
 export default function HomeAdmin() {
@@ -33,7 +34,7 @@ export default function HomeAdmin() {
     }
     catch (err) {
       console.log(err);
-      alert("order problem,come back later")
+      toast.error("order problem,come back later")
     }
   }
 

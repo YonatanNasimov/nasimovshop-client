@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import StripeCheckout from 'react-stripe-checkout';
 import axios from "axios";
+import { toast } from 'react-toastify';
+
 
 const KEY = "pk_test_51M6IivLjTCi7TO8ZcK9apuTBKJEMW10xwW8HbaEhyFlhXmP4X0Yw5SCpwSPhDDCUUQKDM9no0jcPvxSmRT8yMGDP00b7S5rno6"
 
@@ -25,7 +27,7 @@ const Pay = () => {
                 console.log(res.data)
                 nav("/success")
             } catch (err) {
-                alert(err)
+                toast.error("There is a problem try again later")
                 console.log(err)
             }
         };

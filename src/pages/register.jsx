@@ -4,6 +4,7 @@ import { mobile } from '../services/responsive';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import { doApiMethod, server_url, TOKEN_NAME } from '../services/apiServices';
+import { toast } from 'react-toastify';
 
 const Container = styled.div`
     width:100% ;
@@ -100,7 +101,7 @@ const Register = () => {
         }
         catch (err) {
             console.log(err.response);
-            alert("try again");
+            toast.error("try again");
         }
     }
 

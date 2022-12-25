@@ -11,6 +11,9 @@ import {
     deleteUsersFailure, deleteUsersStart, deleteUsersSuccess,
 }
     from "./userSlice";
+    import { toast } from 'react-toastify';
+
+
 
 // products
 // get
@@ -22,7 +25,6 @@ export const getProducts = async (dispatch) => {
         dispatch(getProductsSuccess(resp.data));
     } catch (err) {
         dispatch(getProductsFailure());
-        alert(err)
     }
 };
 // delete
@@ -34,7 +36,6 @@ export const deleteProduct = async (dispatch, id) => {
         dispatch(deleteProductsSuccess(id));
     } catch (err) {
         dispatch(deleteProductsFailure());
-        alert(err)
     }
 };
 // update
@@ -58,7 +59,7 @@ export const addProduct = async (product, dispatch) => {
         dispatch(addProductsSuccess(resp.data));
     } catch (err) {
         dispatch(addProductsFailure());
-        alert("there is a eror you sure all inputs are full")
+        toast.error("there is a eror you sure all inputs are full")
     }
 };
 
@@ -72,7 +73,6 @@ export const getUsers = async (dispatch) => {
         dispatch(getUserssSuccess(resp.data));
     } catch (err) {
         dispatch(getUserssFailure());
-        alert(err)
     }
 };
 // delete
@@ -84,7 +84,6 @@ export const deleteUser = async (dispatch, id) => {
         dispatch(deleteProductsSuccess(id));
     } catch (err) {
         dispatch(deleteUsersFailure());
-        alert(err)
     }
 };
 

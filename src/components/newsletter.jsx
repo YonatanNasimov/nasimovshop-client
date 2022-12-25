@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { doApiMethod, server_url } from '../services/apiServices';
 import { mobile } from '../services/responsive';
+import { toast } from 'react-toastify';
+
 
 const Container = styled.div`
  max-width:100% ;
@@ -74,11 +76,11 @@ const Newsletter = () => {
         let url = server_url + "/email/sendemail"
         try {
             let resp = await doApiMethod(url, "POST", bodyData);
-                alert("messege was sent succsfuly!")
+                toast.success("messege was sent succsfuly!")
         }
         catch (err) {
             console.log(err.response);
-            alert("problem try again later")
+            toast.error("problem try again later")
         }
     }
 
@@ -90,7 +92,7 @@ const Newsletter = () => {
             <Desc>Send us a message if you want to be an admin and upload products please write your username also.</Desc>
             <InputContainer>
                 <Form onSubmit={handleSubmit(onSubForm)}>
-                    <Input {...msgRef} defaultValue='Hello my user is {username} and i want to an admin' />
+                    <Input {...msgRef} defaultValue='Hello my user is {username} and i want to be an admin' />
                     {errors.msg && <Error>Enter valid messege, min 5 chars...</Error>}
                     <Button>
                         <SendIcon />

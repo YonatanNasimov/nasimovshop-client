@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { doApiMethod, server_url } from '../../services/apiServices';
+import { toast } from 'react-toastify';
+
 
 const UpdateUser = () => {
     const params = useParams();
@@ -24,16 +26,16 @@ const UpdateUser = () => {
         try {
             let resp = await doApiMethod(url, "PUT", bodyFormData)
             if (resp.data) {
-                alert("user update succefuly");
+                toast.success("user update succefuly");
                 nav("/admin/users")
             }
             else {
-                alert("There problem , try again later")
+                toast.error("There problem , try again later")
             }
         }
         catch (err) {
             console.log(err);
-            alert("There problem , or category url already in system")
+            toast.error("There problem , or category url already in system")
         }
     }
 

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form"
 import { doApiMethod, server_url, TOKEN_NAME } from '../services/apiServices';
 import { loginFailure, loginStart, loginSuccess } from "../features/userSlice";
+import { toast } from 'react-toastify';
 
 
 const Container = styled.div`
@@ -102,7 +103,7 @@ const Login = () => {
             let resp = await doApiMethod(url, "POST", bodyData);
             localStorage.setItem(TOKEN_NAME, resp.data.token);
             if (!resp.data.user.active) {
-                alert(`Hello ${resp.data.user.username}, you were very naughty!`)
+                toast.error(`Hello ${resp.data.user.username}, you were very naughty!`)
             }
             else if (resp.data.user.role === "admin") {
                 nav("/admin")
@@ -114,7 +115,7 @@ const Login = () => {
         catch (err) {
             console.log(err.response);
             dispatch(loginFailure())
-            alert("User or password worng, or service down");
+            toast.error("User or password worng, or service down");
         }
     }
 

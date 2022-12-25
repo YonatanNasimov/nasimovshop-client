@@ -9,6 +9,8 @@ import { server_url } from "../services/apiServices";
 import { Link, useNavigate } from 'react-router-dom';
 import { logOut } from '../features/userSlice';
 import { resetAllItems } from '../features/cartSlice';
+import { toast } from 'react-toastify';
+
 
 
 
@@ -119,7 +121,7 @@ const Navbar = () => {
     const onCheck = () => {
         if (!user) {
             nav("/login")
-            //   alert(`hello guest You need to sign first`)
+            toast.error(`hello guest You need to sign first`)
         }
     }
 
@@ -157,7 +159,7 @@ const Navbar = () => {
                     <MenuItem>
                         {user
                             ? <button onClick={() => {
-                                window.confirm("are you sure you want to log out your cart will be deleted?") && loginOut();
+                                loginOut();
                             }}>log out</button>
                             : <MenuItem onClick={() => nav("/login")}>Sign in</MenuItem>}
                     </MenuItem>

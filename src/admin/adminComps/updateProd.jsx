@@ -4,6 +4,7 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/
 import app from "../.././services/firebase"
 import { useNavigate, useParams } from "react-router-dom";
 import { doApiMethod, server_url } from "../../services/apiServices";
+import { toast } from 'react-toastify';
 
 const UpdateProd = () => {
     const nav = useNavigate();
@@ -43,16 +44,16 @@ const UpdateProd = () => {
         try {
             let resp = await doApiMethod(url, "PUT", product)
             if (resp.data) {
-                alert("update succefuly");
+                toast.success("update succefuly");
                 nav("/admin/products")
             }
             else {
-                alert("There problem , try again later")
+                toast.error("There problem , try again later")
             }
         }
         catch (err) {
             console.log(err);
-            alert("There problem")
+            toast.error("There problem")
         }
     }
 

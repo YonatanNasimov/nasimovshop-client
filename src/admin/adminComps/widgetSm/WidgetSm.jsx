@@ -1,11 +1,14 @@
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { doApiGet, server_url } from '../../../services/apiServices';
+import { toast } from 'react-toastify';
 import "./widgetSm.css";
 
 
 export default function WidgetSm() {
+  const nav = useNavigate();
   const [users, setUsers] = useState([]);
   useEffect(() => {
     getUsers();
@@ -19,7 +22,7 @@ export default function WidgetSm() {
     }
     catch (err) {
       console.log(err.response);
-      alert("There problem try come back later")
+      toast.error("There problem try come back later")
     }
   }
 
@@ -38,7 +41,9 @@ export default function WidgetSm() {
               <div className="widgetSmUser">
                 <span className="widgetSmUsername">{item.username}</span>
               </div>
-              <button className="widgetSmButton">
+              <button onClick={() => {
+                nav("/admin/user/" + item._id)
+              }} className="widgetSmButton">
                 <VisibilityIcon className="widgetSmIcon" />
                 Display
               </button>
